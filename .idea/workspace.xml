@@ -2,31 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0b31784-9bdf-4f3a-a05b-ea1df8351816" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/routes/router.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/babyblog.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/babyblog.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/launch.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/v1/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/article.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/v1/categroy.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/categroy.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/v1/login.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/login.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/v1/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/article.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Article.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/category.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/Category.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/db.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/db.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/User.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/routes.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/errmsg/errmsg.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/errmsg/errmsg.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utils/setting.go" beforeDir="false" afterPath="$PROJECT_DIR$/utils/setting.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/launch.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,6 +42,7 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
+    <property name="GO_FMT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1599928945831" />
@@ -138,6 +117,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Added user add api" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added user add api" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -153,6 +134,10 @@
       <screen x="-1920" y="-157" width="1920" height="1057" />
     </state>
     <state x="-1160" y="37" key="#GOPATH/0.23.1440.877/-1920.-157.1920.1057@-1920.-157.1920.1057" timestamp="1600265566012" />
+    <state x="278" y="23" key="CommitChangelistDialog2" timestamp="1600367478431">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="278" y="23" key="CommitChangelistDialog2/0.0.1440.900/-200.-1080.1920.1080@0.0.1440.900" timestamp="1600367478431" />
     <state width="1398" height="244" key="GridCell.Tab.0.bottom" timestamp="1600362576497">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
@@ -194,6 +179,10 @@
     </state>
     <state x="346" y="142" key="SettingsEditor/0.0.1440.900/-200.-1080.1920.1080@0.0.1440.900" timestamp="1600365416549" />
     <state x="-1459" y="10" key="SettingsEditor/0.23.1440.877/-1920.-157.1920.1057@-1920.-157.1920.1057" timestamp="1600359919148" />
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2" timestamp="1600368073880">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="320" y="190" key="Vcs.Push.Dialog.v2/0.0.1440.900/-200.-1080.1920.1080@0.0.1440.900" timestamp="1600368073880" />
     <state x="-1167" y="292" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1600264503161">
       <screen x="-1920" y="-157" width="1920" height="1057" />
     </state>
