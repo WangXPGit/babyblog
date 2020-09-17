@@ -2,15 +2,14 @@ package model
 
 import (
 	"babyblog/utils/errmsg"
-
 	"gorm.io/gorm"
 )
 
 type User struct {
 	gorm.Model
-	Username string `gorm:"type: varchar(20); not null" json: "username"`
-	Password string `gorm:"type: varchar(20); not null" json: "password"`
-	Role     int    `gorm:"type: int; not null" json: "role"`
+	Username string `gorm:"type:varchar(20); not null " json:"username"`
+	Password string `gorm:"type:varchar(20); not null " json:"password"`
+	Role     int    `gorm:"type:int" json:"role"`
 }
 
 func CheckUser(name string) (code int) {
@@ -26,8 +25,7 @@ func CheckUser(name string) (code int) {
 func CreateUser(data *User) int {
 	err := db.Create(&data).Error
 	if err != nil {
-		return errmsg.ERR
-		// return errmsg.Error
+		return errmsg.ERROR
 	}
 	return errmsg.SUCCESS
 }

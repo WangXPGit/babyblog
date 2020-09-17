@@ -2,7 +2,7 @@ package errmsg
 
 const (
 	SUCCESS = 200
-	ERR   = 500
+	ERROR   = 500
 
 	// code 1000... 表示用户模块错误
 	ERROR_USERNAME_USED    = 1001
@@ -18,7 +18,7 @@ const (
 
 var codemsg = map[int]string{
 	SUCCESS:                "OK",
-	ERR:                    "FAIL",
+	ERROR:                  "FAIL",
 	ERROR_USERNAME_USED:    "用户名已存在",
 	ERROR_PASSWORD_WRONG:   "密码错误",
 	ERROR_USE_NOT_EXIST:    "用户不存在",
