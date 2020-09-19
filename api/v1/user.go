@@ -54,7 +54,21 @@ func GetUsers(c *gin.Context) {
 }
 
 func EditUser(c *gin.Context) {
-	// todo 编辑指定用户
+	var data model.User
+	id, _ := strconv.Atoi(c.Param("id"))
+	c.ShouldBindJSON(&data)
+	code := model.CheckUser(data.Username)
+	if code == errmsg.SUCCESS {
+		model.EditUser(id, &data)
+	}
+	if code == errmsg.ERROR_USERNAME_USED {
+		c.Abort()
+	}
+
+	c.JSON(http.StatusOK, gin.H{
+		"stauts":  code,
+		"message": errmsg.GetErrMsg(code),
+	})
 }
 
 func DeleteUser(c *gin.Context) {

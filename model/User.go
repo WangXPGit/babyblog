@@ -54,6 +54,17 @@ func DeleteUser(id int) int {
 	return errmsg.SUCCESS
 }
 
+func EditUser(id int, data *User) int {
+	var maps = make(map[string]interface{})
+	maps["username"] = data.Username
+	maps["role"] = data.Role
+	err = db.Model(&User{}).Where("id =?", id).Updates(maps).Error
+	if err != nil {
+		return errmsg.ERROR
+	}
+	return errmsg.SUCCESS
+}
+
 func ScryptPw(password string) string {
 	const KeyLen = 10
 	salt := make([]byte, 8)
