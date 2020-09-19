@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b0b31784-9bdf-4f3a-a05b-ea1df8351816" name="Default Changelist" comment="Added user add api">
+    <list default="true" id="b0b31784-9bdf-4f3a-a05b-ea1df8351816" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/v1/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/api/v1/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/model/User.go" beforeDir="false" afterPath="$PROJECT_DIR$/model/User.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,7 +116,8 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Added user add api" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added user add api" />
+    <MESSAGE value="Added get users api" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added get users api" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -136,10 +133,10 @@
       <screen x="-1920" y="-157" width="1920" height="1057" />
     </state>
     <state x="-1160" y="37" key="#GOPATH/0.23.1440.877/-1920.-157.1920.1057@-1920.-157.1920.1057" timestamp="1600265566012" />
-    <state x="0" y="23" width="1162" height="854" key="CommitChangelistDialog2" timestamp="1600523054373">
+    <state x="0" y="23" width="1162" height="854" key="CommitChangelistDialog2" timestamp="1600523094899">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="0" y="23" key="CommitChangelistDialog2/0.0.1440.900/-1920.-88.1920.1057@0.0.1440.900" timestamp="1600523054373" />
+    <state x="0" y="23" key="CommitChangelistDialog2/0.0.1440.900/-1920.-88.1920.1057@0.0.1440.900" timestamp="1600523094899" />
     <state x="0" y="23" width="1162" height="854" key="CommitChangelistDialog2/0.0.1440.900/-200.-1080.1920.1080@0.0.1440.900" timestamp="1600368971039" />
     <state width="1398" height="304" key="GridCell.Tab.0.bottom" timestamp="1600400818548">
       <screen x="-1920" y="-157" width="1920" height="1057" />
