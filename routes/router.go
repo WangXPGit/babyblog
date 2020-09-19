@@ -1,8 +1,9 @@
 package routes
 
 import (
-	"babyblog/api/v1"
+	v1 "babyblog/api/v1"
 	"babyblog/utils"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,6 +18,12 @@ func InitRouter() {
 		r.GET("user/list", v1.GetUsers)
 		r.PUT("user/:id", v1.EditUser)
 		r.DELETE("user/:id", v1.DeleteUser)
+
+		// 分类模块
+		r.POST("category/add", v1.AddCategory)
+		r.GET("category/list", v1.GetCategories)
+		r.PUT("category/:id", v1.EditCategory)
+		r.DELETE("category/:id", v1.DeleteCategory)
 
 		// 文章模块接口
 		//
