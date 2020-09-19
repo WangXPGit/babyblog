@@ -12,9 +12,10 @@ const (
 	ERROR_TOKEN_RUNTIME    = 1005
 	ERROR_TOKEN_WRONG      = 1006
 	ERROR_TOKEN_TYPE_WRONG = 1007
+	ERROR_USER_NO_RIGHT    = 1008
 
 	// code 2000... 表示分类模块错误
-	ERROR_CATEGORYNAME_USED = 2001
+	ERROR_CATEGORYNAME_USED  = 2001
 	ERROR_CATEGORY_NOT_EXIST = 2002
 
 	// code 3000... 表示文章模块错误
@@ -31,6 +32,7 @@ var codemsg = map[int]string{
 	ERROR_TOKEN_RUNTIME:    "Token 已过期",
 	ERROR_TOKEN_WRONG:      "Token 不正确",
 	ERROR_TOKEN_TYPE_WRONG: "Token 格式错误",
+	ERROR_USER_NO_RIGHT:    "该用户无权限",
 
 	ERROR_CATEGORYNAME_USED: "分类已存在",
 

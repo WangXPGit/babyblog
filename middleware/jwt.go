@@ -45,7 +45,7 @@ func CheckToken(token string) (*MyClaims, int) {
 		return JwtKey, nil
 	})
 
-	if key, _ := setToken.Claims.(*MyClaims); && settoken.Valid {
+	if key, _ := setToken.Claims.(*MyClaims); setToken.Valid {
 		return key, errmsg.SUCCESS
 	} else {
 		return nil, errmsg.ERROR
@@ -87,7 +87,7 @@ func JwtToken() gin.HandlerFunc {
 				"message": errmsg.GetErrMsg(code),
 			})
 			c.Abort()
-			return 
+			return
 		}
 		c.Set("username", key.Username)
 		c.Next()
