@@ -45,6 +45,15 @@ func GetUsers(pageSize int, pageNum int) []User {
 	return users
 }
 
+func DeleteUser(id int) int {
+	var user User
+	err = db.Where("id =?", id).Delete(&user).Error
+	if err != nil {
+		return errmsg.ERROR
+	}
+	return errmsg.SUCCESS
+}
+
 func ScryptPw(password string) string {
 	const KeyLen = 10
 	salt := make([]byte, 8)
