@@ -17,6 +17,11 @@ var (
 	DbUser     string
 	DbPassWord string
 	DbName     string
+
+	AccessKey    string
+	SecretKey    string
+	Bucket       string
+	AliyunServer string
 )
 
 func init() {
@@ -27,6 +32,7 @@ func init() {
 
 	LoadServer(file)
 	LoadData(file)
+	LoadAliyun(file)
 }
 
 func LoadServer(file *ini.File) {
@@ -42,4 +48,11 @@ func LoadData(file *ini.File) {
 	DbUser = file.Section("database").Key("DbUser").MustString("root")
 	DbPassWord = file.Section("database").Key("DbPassWord").MustString("Aa123456")
 	DbName = file.Section("database").Key("DbName").MustString("baby_blog")
+}
+
+func LoadAliyun(file *ini.File) {
+	AccessKey = file.Section("servealiyunr").Key("AccessKey").String()
+	SecretKey = file.Section("aliyun").Key("SecretKey").String()
+	Bucket = file.Section("aliyun").Key("Bucket").String()
+	AliyunServer = file.Section("aliyun").Key("AliyunServer").String()
 }

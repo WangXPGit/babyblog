@@ -3,6 +3,7 @@ module babyblog
 go 1.15
 
 require (
+	github.com/aliyun/aliyun-oss-go-sdk v2.1.4+incompatible
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-playground/validator/v10 v10.3.0 // indirect
@@ -15,6 +16,7 @@ require (
 	github.com/ugorji/go v1.1.8 // indirect
 	golang.org/x/crypto v0.0.0-20190308221718-c2843e01d9a2
 	golang.org/x/sys v0.0.0-20200909081042-eff7692f9009 // indirect
+	golang.org/x/time v0.0.0-20200630173020-3af7569d3a1e // indirect
 	google.golang.org/protobuf v1.25.0 // indirect
 	gopkg.in/ini.v1 v1.61.0
 	gopkg.in/yaml.v2 v2.3.0 // indirect
