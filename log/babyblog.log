@@ -1,0 +1,1 @@
+time="2020-09-20T20:03:48+08:00" level=info Agent=PostmanRuntime/7.26.5 DataSize=41 HostName=xiaopingwangdeMacBook-Pro.local Ip="::1" Method=GET Path=/api/v1/user/list SpendTime="3 ms" status=200

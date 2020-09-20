@@ -10,7 +10,9 @@ import (
 
 func InitRouter() {
 	gin.SetMode(utils.AppMode)
-	router := gin.Default()
+	router := gin.New()
+	router.Use(middleware.Logger())
+	router.Use(gin.Recovery())
 
 	// 鉴权组
 	auth := router.Group("/api/v1")
