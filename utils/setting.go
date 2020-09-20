@@ -18,10 +18,10 @@ var (
 	DbPassWord string
 	DbName     string
 
-	AccessKey    string
-	SecretKey    string
-	Bucket       string
-	AliyunServer string
+	AccessKey string
+	SecretKey string
+	Bucket    string
+	Server    string
 )
 
 func init() {
@@ -32,7 +32,8 @@ func init() {
 
 	LoadServer(file)
 	LoadData(file)
-	LoadAliyun(file)
+	// LoadAliyun(file)
+	LoadQiniu(file)
 }
 
 func LoadServer(file *ini.File) {
@@ -51,8 +52,15 @@ func LoadData(file *ini.File) {
 }
 
 func LoadAliyun(file *ini.File) {
-	AccessKey = file.Section("servealiyunr").Key("AccessKey").String()
+	AccessKey = file.Section("aliyun").Key("AccessKey").String()
 	SecretKey = file.Section("aliyun").Key("SecretKey").String()
 	Bucket = file.Section("aliyun").Key("Bucket").String()
-	AliyunServer = file.Section("aliyun").Key("AliyunServer").String()
+	Server = file.Section("aliyun").Key("AliyunServer").String()
+}
+
+func LoadQiniu(file *ini.File) {
+	AccessKey = file.Section("qiniu").Key("AccessKey").String()
+	SecretKey = file.Section("qiniu").Key("SecretKey").String()
+	Bucket = file.Section("qiniu").Key("Bucket").String()
+	Server = file.Section("qiniu").Key("QiniuServer").String()
 }

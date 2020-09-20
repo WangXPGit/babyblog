@@ -3,35 +3,39 @@ package model
 import (
 	"babyblog/utils"
 	"babyblog/utils/errmsg"
+	"context"
 	"mime/multipart"
 
-	"github.com/aliyun/aliyun-oss-go-sdk/oss"
+	"github.com/qiniu/api.v7/v7/auth/qbox"
+	"github.com/qiniu/api.v7/v7/storage"
 )
 
 var AccessKey = utils.AccessKey
-var ScretKey = utils.ScretKey
+var SecretKey = utils.SecretKey
 var Bucket = utils.Bucket
-var AliyunServer = utils.AliyunServer
+var Server = utils.Server
 
 func UploadFile(file multipart.File, fileSize int64) (string, int) {
-	// <yourObjectName>上传文件到OSS时需要指定包含文件后缀在内的完整路径，例如abc/efg/123.jpg。
-	objectName := "<yourObjectName>"
-	// <yourLocalFileName>由本地文件路径加文件名包括后缀组成，例如/users/local/myfile.txt。
-	localFileName := "<yourLocalFileName>"
-	// 创建OSSClient实例。
-	client, err := oss.New(AliyunServer, AccessKey, ScretKey)
-	var url string
-	if err != nil {
-		return url, errmsg.ERROR
+	putPolicy := storage.PutPolicy{
+		Scope: Bucket,
 	}
-	// 获取存储空间。
-	bucket, err := client.Bucket(Bucket)
-	if err != nil {
-		return url, errmsg.ERROR
+	mac := qbox.NewMac(AccessKey, SecretKey)
+	upToken := putPolicy.UploadToken(mac)
+
+	cfg := storage.Config{
+		Zone:          &storage.ZoneHuanan,
+		UseCdnDomains: false,
+		UseHTTPS:      false,
 	}
-	// 上传文件。
-	err = bucket.PutObjectFromFile(objectName, localFileName)
+
+	putExtra := storage.PutExtra{}
+	formUploader := storage.NewFormUploader(&cfg)
+	ret := storage.PutRet{}
+
+	err := formUploader.PutWithoutKey(context.Background(), &ret, upToken, file, fileSize, &putExtra)
 	if err != nil {
-		return url, errmsg.ERROR
+		return "", errmsg.ERROR
 	}
+	url := Server + ret.Key
+	return url, errmsg.SUCCESS
 }
