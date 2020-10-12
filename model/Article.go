@@ -26,23 +26,25 @@ func CreateArticle(data *Article) int {
 }
 
 // 查询文章列表
-func GetArtilcles(pageSize int, pageNum int) ([]Article, int) {
+func GetArtilcles(pageSize int, pageNum int) ([]Article, int, int64) {
 	var article []Article
-	err = db.Preload("Category").Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&article).Error
+	var total int64
+	err = db.Preload("Category").Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&article).Count(&total).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
-		return nil, errmsg.ERROR
+		return nil, errmsg.ERROR, 0
 	}
-	return article, errmsg.SUCCESS
+	return article, errmsg.SUCCESS, total
 }
 
 // 查询指定分类下的文章列表
-func GetCategoryArtilcle(categoryId int, pageSize int, pageNum int) ([]Article, int) {
+func GetCategoryArtilcle(categoryId int, pageSize int, pageNum int) ([]Article, int, int64) {
 	var categroyArticle []Article
-	err = db.Preload("Category").Limit(pageSize).Offset((pageNum-1)*pageSize).Where("cid = ?", categoryId).Find(&categroyArticle).Error
+	var total int64
+	err = db.Preload("Category").Limit(pageSize).Offset((pageNum-1)*pageSize).Where("cid = ?", categoryId).Find(&categroyArticle).Count(&total).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
-		return nil, errmsg.ERROR_CATEGORY_NOT_EXIST
+		return nil, errmsg.ERROR_CATEGORY_NOT_EXIST, 0
 	}
-	return categroyArticle, errmsg.SUCCESS
+	return categroyArticle, errmsg.SUCCESS, total
 }
 
 // 查询单个文章

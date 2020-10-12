@@ -22,16 +22,16 @@ func Checkcategory(name string) (code int) {
 }
 
 // 查询分类
-func GetCategory(pageSize int, pageNum int) []Category {
+func GetCategory(pageSize int, pageNum int) ([]Category, int64) {
 	var category []Category
-	err = db.Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&category).Error
+	var total int64
+	err = db.Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&category).Count(&total).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
-		return nil
+		return nil, 0
 	}
-	return category
+	return category, total
 }
 
-// 查询分类列表
 // 新增分类
 func CreateCategory(data *Category) int {
 	err := db.Create(&data).Error
