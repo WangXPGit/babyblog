@@ -1,1 +1,4 @@
-time="2020-09-20T20:03:48+08:00" level=info Agent=PostmanRuntime/7.26.5 DataSize=41 HostName=xiaopingwangdeMacBook-Pro.local Ip="::1" Method=GET Path=/api/v1/user/list SpendTime="3 ms" status=200
+time="2020-10-12T20:07:47+08:00" level=info Agent=PostmanRuntime/7.26.5 DataSize=55 HostName=promote.cache-dns.local Ip="::1" Method=POST Path=/api/v1/user/add SpendTime="0 ms" status=200
+time="2020-10-12T20:07:56+08:00" level=info Agent=PostmanRuntime/7.26.5 DataSize=64 HostName=promote.cache-dns.local Ip="::1" Method=POST Path=/api/v1/user/add SpendTime="0 ms" status=200
+time="2020-10-12T20:07:27+08:00" level=info Agent=PostmanRuntime/7.26.5 DataSize=53 HostName=promote.cache-dns.local Ip="::1" Method=POST Path=/api/v1/user/add SpendTime="0 ms" status=200
+time="2020-10-12T20:00:31+08:00" level=info Agent=PostmanRuntime/7.26.5 DataSize=53 HostName=promote.cache-dns.local Ip="::1" Method=POST Path=/api/v1/user/add SpendTime="0 ms" status=200
