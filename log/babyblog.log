@@ -1,4 +1,0 @@
-time="2020-10-12T21:28:25+08:00" level=info Agent=PostmanRuntime/7.26.5 DataSize=51 HostName=promote.cache-dns.local Ip="::1" Method=GET Path=/api/v1/user/list SpendTime="9 ms" status=200
-time="2020-10-12T21:28:36+08:00" level=info Agent=PostmanRuntime/7.26.5 DataSize=96 HostName=promote.cache-dns.local Ip="::1" Method=GET Path="/api/v1/category/list?pageNum=3&pageSize=0" SpendTime="4 ms" status=200
-time="2020-10-12T21:28:49+08:00" level=info Agent=PostmanRuntime/7.26.5 DataSize=50 HostName=promote.cache-dns.local Ip="::1" Method=GET Path="/api/v1/categoryarticle/list?id=1" SpendTime="2 ms" status=200
-time="2020-10-12T21:28:56+08:00" level=info Agent=PostmanRuntime/7.26.5 DataSize=53 HostName=promote.cache-dns.local Ip="::1" Method=GET Path=/api/v1/article/list SpendTime="2 ms" status=200
