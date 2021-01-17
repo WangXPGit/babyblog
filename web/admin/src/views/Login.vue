@@ -1,7 +1,7 @@
 <template>
     <div class="container">
         <div class="loginBox">
-            <a-form-model
+            <a-form-model ref="loginFormRef"
                     :rules="rules"
                     :model="formdata" class="loginForm">
                 <a-form-model-item prop="username">
@@ -22,7 +22,7 @@
 
                 <a-form-model-item class="loginBtn">
                     <a-button type="primary" style="margin:10px">登录</a-button>
-                    <a-button type="info" style="margin:10px">取消</a-button>
+                    <a-button type="info" style="margin:10px" @click="resetForm">取消</a-button>
                 </a-form-model-item>
             </a-form-model>
         </div>
@@ -47,6 +47,11 @@ export default {
                     { min: 6, max: 20, message: '密码必须在6到20个字符之间', trigger: 'blur' },
                 ],
             }
+        }
+    },
+    methods:{
+        resetForm(){
+            this.$refs.loginFormRef.resetFields()
         }
     }
 }
