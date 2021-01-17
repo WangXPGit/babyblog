@@ -1,5 +1,13 @@
 import Vue from 'vue'
-import { Button, FormModel, Input, Icon } from 'ant-design-vue'
+import { Button, FormModel, Input, Icon, message } from 'ant-design-vue'
+
+message.config({
+    top: `100px`,
+    duration: 2,
+    maxCount: 3,
+  })
+
+Vue.prototype.$message = message
 
 Vue.use(FormModel)
 Vue.use(Input)

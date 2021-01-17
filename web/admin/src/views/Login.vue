@@ -21,7 +21,7 @@
                 </a-form-model-item>
 
                 <a-form-model-item class="loginBtn">
-                    <a-button type="primary" style="margin:10px">登录</a-button>
+                    <a-button type="primary" style="margin:10px" @click="login">登录</a-button>
                     <a-button type="info" style="margin:10px" @click="resetForm">取消</a-button>
                 </a-form-model-item>
             </a-form-model>
@@ -52,6 +52,14 @@ export default {
     methods:{
         resetForm(){
             this.$refs.loginFormRef.resetFields()
+        },
+        login(){
+            this.$refs.loginFormRef.validate(valid => {
+                console.log(valid)
+                if (!valid) {
+                    return this.$message.error("非法数据，请重新输入");
+                }
+            })
         }
     }
 }
