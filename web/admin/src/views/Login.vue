@@ -52,12 +52,17 @@ export default {
     methods:{
         resetForm(){
             this.$refs.loginFormRef.resetFields()
+            console.log(this.$refs.loginFormRef)
         },
         login(){
-            this.$refs.loginFormRef.validate(valid => {
-                console.log(valid)
-                if (!valid) {
-                    return this.$message.error("非法数据，请重新输入");
+            this.$refs.loginFormRef.validate(async valid => {
+                if (!valid) return this.$message.error("非法数据，请重新输入")
+                const {data: res} = await this.$http.post('login', this.formdata)
+                if (res.status != 200) {
+                    return this.$message.error(res.message)
+                } else {
+                    sessionStorage.setItem('token', res.token)
+                    this.$router.push('admin')
                 }
             })
         }

@@ -2,7 +2,7 @@ import Vue from 'vue'
 import { Button, FormModel, Input, Icon, message } from 'ant-design-vue'
 
 message.config({
-    top: `100px`,
+    top: `60px`,
     duration: 2,
     maxCount: 3,
   })
