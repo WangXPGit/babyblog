@@ -8,7 +8,7 @@
       </a-layout-sider>
       <a-layout>
         <a-layout-header class="headerBtn">
-            <a-button type="danger" @click="logout">退出</a-button>
+            <Header></Header>
         </a-layout-header>
         <a-layout-content>
             <router-view></router-view>
@@ -23,8 +23,9 @@
 <script>
 import Nav from '../../admin-component/Nav'
 import Footer from '../../admin-component/Footer'
+import Header from '../../admin-component/Header'
 export default {
-    components : {Nav, Footer},
+    components : {Nav, Footer, Header},
     methods: {
         logout() {
             sessionStorage.clear('token')
