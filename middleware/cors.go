@@ -7,12 +7,25 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// func Cors() gin.HandlerFunc {
+// 	return cors.New(
+// 		cors.Config{
+// 			AllowOrigins:     []string{"*"},
+// 			AllowMethods:     []string{"*"},
+// 			AllowHeaders:     []string{"Origin"},
+// 			ExposeHeaders:    []string{"Content-Length", "Authorization", "Content-Type"},
+// 			AllowCredentials: true,
+// 			MaxAge:           12 * time.Hour,
+// 		},
+// 	)
+// }
+
 func Cors() gin.HandlerFunc {
 	return cors.New(
 		cors.Config{
-			AllowOrigins:     []string{"*"},
-			AllowMethods:     []string{"*"},
-			AllowHeaders:     []string{"Origin"},
+			AllowAllOrigins:  true,
+			AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+			AllowHeaders:     []string{"*"},
 			ExposeHeaders:    []string{"Content-Length", "Authorization", "Content-Type"},
 			AllowCredentials: true,
 			MaxAge:           12 * time.Hour,

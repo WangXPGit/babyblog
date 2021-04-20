@@ -1,11 +1,6 @@
 <template>
     <a-layout class="container">
-      <a-layout-sider>
-          <div class="log">
-              <span>Baby Blog</span>
-          </div>
-          <Nav></Nav>
-      </a-layout-sider>
+      <Nav></Nav>
       <a-layout>
         <a-layout-header class="headerBtn">
             <Header></Header>
@@ -45,13 +40,5 @@ export default {
     align-items: center;
 }
 
-.log {
-    height: 32px;
-    margin: 16px;
-    background: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 17px;
-}
+
 </style>
