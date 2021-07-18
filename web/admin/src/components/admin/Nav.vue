@@ -28,9 +28,9 @@ export default {
             collapsed:false
         }
     },
-    method: {
-        goToPage() {
-            
+    methods: {
+        goToPage(item) {
+            this.$router.push(item.key)
         }
     }
 }
