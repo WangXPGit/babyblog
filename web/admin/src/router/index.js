@@ -24,23 +24,23 @@ const routes = [
     component: Admin,
     children:[
       {
-        path: '/index',
+        path: 'index',
         component: Index
       },
       {
-        path: '/addart',
+        path: 'addart',
         component: AddArt
       },
       {
-        path: '/artlist',
+        path: 'artlist',
         component: ArtList
       },
       {
-        path: '/catelist',
+        path: 'catelist',
         component: CateList
       },
       {
-        path: '/userlist',
+        path: 'userlist',
         component: UserList
       }
     ]
