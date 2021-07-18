@@ -1,7 +1,8 @@
 <template>
     <a-layout-sider breakpoint="lg" v-model="collapsed">
         <div class="log">
-            <span>Baby Blog</span>
+            <!-- <span>Baby Blog</span> -->
+            <span>{{ collapsed ? 'Blog' : 'Baby Blog'}}</span>
         </div>
        
         <a-menu theme="dark" mode="inline">
@@ -20,6 +21,15 @@
     </a-layout-sider>
 </template>
 
+<script>
+export default {
+    data() {
+        return {
+            collapsed:false
+        }
+    }
+}
+</script>
 <style scoped>
 .log {
     height: 32px;
