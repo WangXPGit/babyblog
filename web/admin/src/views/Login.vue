@@ -64,7 +64,7 @@ export default {
                     return this.$message.error(res.message)
                 } else {
                     sessionStorage.setItem('token', res.token)
-                    this.$router.push('admin')
+                    this.$router.push('admin/index')
                 }
             })
         }
