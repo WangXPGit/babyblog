@@ -43,8 +43,16 @@ func AddUser(c *gin.Context) {
 	})
 }
 
-func GetUser(c *gin.Context) {
-	// todo 查询指定用户
+func GetUserInfo(c *gin.Context) {
+	id, _ := strconv.Atoi(c.Param("id"))
+	data, code := model.GetUser(id)
+
+	c.JSON(http.StatusOK, gin.H{
+		"status":  code,
+		"data":    data,
+		"total":   1,
+		"message": errmsg.GetErrMsg(code),
+	})
 }
 
 func GetUsers(c *gin.Context) {
