@@ -11,7 +11,7 @@
                 </a-col>
             </a-row>
 
-            <a-table rowKey="username" :columns="columns" :pagination='paginationOption' :dataSource="userlist" bordered>
+            <a-table rowKey="username" :columns="columns" :pagination='pagination' :dataSource="userlist" bordered @change="handleTableChange">
                 <span slot="role" slot-scope="role">{{ role == 1 ? '管理员' : '用户'}}</span>
                 <template slot="action">
                     <div class="actionSlot">
@@ -60,26 +60,20 @@ const columns = [
 export default {
     data() {
         return {
-            paginationOption: {
+            pagination: {
                 pageSizeOptions: ['5', '10', '20'],
-                defaultCurrent:1,
-                defaultPageSize:5,
-                total:0,
-                showSizeChanger:true,
+                pageSize: 5,
+                total: 0,
+                showSizeChanger: true,
                 showTotal: (total) => `共${total}条`,
-                onChange: (current, pageSize) => {
-                    this.paginationOption.defaultCurrent = current
-                    this.paginationOption.defaultPageSize = pageSize
-                    this.getUserList()
-                },
-                onShowSizeChange: (current, size) => {
-                    this.paginationOption.defaultCurrent = current
-                    this.paginationOption.defaultPageSize = size
-                    this.getUserList()
-                },
             },
             userlist: [],
             columns,
+            queryParam: {
+                pagesize: 5,
+                pagenum: 1,
+            },
+            visible: false,
         }
     },
     created(){
@@ -89,15 +83,29 @@ export default {
         async getUserList() {
             const { data: res } = await this.$http.get('user/list', {
                 params: {
-                    pageSize: this.paginationOption.defaultPageSize,
-                    pageNum: this.paginationOption.defaultCurrent,
+                    pageSize: this.queryParam.pagesize,
+                    pageNum: this.queryParam.pagenum,
                     },
             })
             
-            if (res.status != 200) 
-                return this.$message.error(res.message)
+            if (res.status != 200) return this.$message.error(res.message)
             this.userlist = res.data
-            this.paginationOption.total = res.total
+            this.pagination.total = res.total
+        },
+    
+        handleTableChange(pagination, filters, sorter) {
+            var pager = { ...this.pagination }
+            pager.current = pagination.current
+            pager.pageSize = pagination.pageSize
+            this.queryParam.pagenum = pagination.pageSize
+            this.queryParam.pagenum = pagination.current
+
+            if (pagination.pageSize !== this.pagination.pageSize) {
+                this.queryParam.pagenum = 1
+                pager.current = 1
+            }
+            this.pagination = pager
+            this.getUserList()
         }
     },
 }
