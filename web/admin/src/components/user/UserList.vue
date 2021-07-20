@@ -4,7 +4,7 @@
         <a-card>
             <a-row :gutter="20">
                 <a-col :span="6">
-                    <a-input-search v-model="queryParam.username" placeholder="输入用户名查找" enter-button @search="getUserList" />
+                    <a-input-search v-model="queryParam.username" placeholder="输入用户名查找" enter-button allowClear @search="getUserList" />
                 </a-col>
                 <a-col :span="4">
                     <a-button type="primary">新增</a-button>
@@ -13,10 +13,10 @@
 
             <a-table rowKey="username" :columns="columns" :pagination='pagination' :dataSource="userlist" bordered @change="handleTableChange">
                 <span slot="role" slot-scope="role">{{ role == 1 ? '管理员' : '用户'}}</span>
-                <template slot="action">
+                <template slot="action" slot-scope="data">
                     <div class="actionSlot">
                         <a-button type="primary" style="margin-right:15px">编辑</a-button>
-                        <a-button type="danger">删除</a-button>
+                        <a-button type="danger" @click="deleteUser(data.ID)">删除</a-button>
                     </div>
                 </template>
             </a-table>
@@ -108,6 +108,23 @@ export default {
             }
             this.pagination = pager
             this.getUserList()
+        },
+
+        // 删除用户
+        async deleteUser(id) {
+            this.$confirm({
+                title: '提示： 请再次确认',
+                content: '一旦删除将无法恢复！',
+                onOk: async () => {
+                    const res = await this.$http.delete(`user/${id}`)
+                    if (res.status != 200) return this.$message.error(res.message)
+                    this.$message.success('删除成功')
+                    this.getUserList()
+                },
+                onCancel: () => {
+                    this.$message.info('已取消删除')
+                },
+            });
         }
     },
 }

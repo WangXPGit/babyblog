@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import { Button, FormModel, Input, Icon, 
-  message, Layout, Menu, Card, Table, Row, Col, ConfigProvider
+  message, Layout, Menu, Card, Table, Row, Col, ConfigProvider,
+  Modal
 } from 'ant-design-vue'
 
 message.config({
@@ -10,6 +11,7 @@ message.config({
   })
 
 Vue.prototype.$message = message
+Vue.prototype.$confirm = Modal.confirm
 
 Vue.use(FormModel)
 Vue.use(Input)
@@ -22,3 +24,4 @@ Vue.use(Table)
 Vue.use(Row)
 Vue.use(Col)
 Vue.use(ConfigProvider)
+Vue.use(Modal)
