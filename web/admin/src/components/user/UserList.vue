@@ -15,7 +15,7 @@
                 <span slot="role" slot-scope="role">{{ role == 1 ? '管理员' : '用户'}}</span>
                 <template slot="action" slot-scope="data">
                     <div class="actionSlot">
-                        <a-button type="primary" style="margin-right:15px">编辑</a-button>
+                        <a-button type="primary" style="margin-right:15px" @click="editUser(data.ID)">编辑</a-button>
                         <a-button type="danger" @click="deleteUser(data.ID)">删除</a-button>
                     </div>
                 </template>
@@ -41,6 +41,24 @@
                     <a-input-password v-model="userInfo.checkpass"></a-input-password>
                 </a-form-model-item>
 
+                <a-form-model-item label="是否为管理员" prop="role">
+                    <a-select defaultValue="2" style="120px" @change="adminChange">
+                        <a-select-option key="1" value="1">是</a-select-option>
+                        <a-select-option key="2" value="2">否</a-select-option>
+                    </a-select>
+                </a-form-model-item>
+            </a-form-model>
+        </a-modal>
+
+        <!-- 编辑用户区域 -->
+        <a-modal title="编辑用户"
+                :visible="editUserVisible"
+                @ok="editUserOk"
+                @cancel="editUserCancel">
+            <a-form-model :model="userInfo" :rules="userRules" ref="addUserRef">
+                <a-form-model-item label="用户名" prop="username">
+                    <a-input v-model="userInfo.username"></a-input>
+                </a-form-model-item>
                 <a-form-model-item label="是否为管理员" prop="role">
                     <a-select defaultValue="2" style="120px" @change="adminChange">
                         <a-select-option key="1" value="1">是</a-select-option>
@@ -152,7 +170,8 @@ export default {
                                 }
                             }, trigger: 'blur',
                         }], 
-            }
+            },
+            editUserVisible: false,
         }
     },
     created(){
@@ -226,11 +245,38 @@ export default {
         addUserCancel() {
             this.$refs.addUserRef.resetFields()
             this.addUserVisible = false
+            this.$message.info('添加已取消')
         },
 
         adminChange(value) {
             this.userInfo.role = value
             console.log(this.userInfo.role)
+        },
+
+        // 编辑用户
+        async editUser(id) {
+            this.editUserVisible = true
+            const { data: res} = await this.$http.get(`user/${id}`)
+            this.userInfo = res.data
+            this.userInfo.id = id
+        },
+        editUserOk() {
+            this.$refs.addUserRef.validate(async (valid)=> {
+                if (!valid) return this.$message.error("参数不符合要求，请重新输入")
+                const { data: res } = await this.$http.put(`user/${this.userInfo.id}`, {
+                    username: this.userInfo.username,
+                    role: this.userInfo.role,
+                })
+                if (res.status != 200) return this.$message.error(res.message)
+                this.$message.success('编辑用户成功')
+                this.editUserVisible = false
+                this.getUserList()
+            })
+        },
+        editUserCancel() {
+            this.$refs.addUserRef.resetFields()
+            this.editUserVisible = false
+            this.$message.info('编辑已取消')
         }
     },
 }

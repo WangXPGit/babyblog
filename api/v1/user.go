@@ -89,7 +89,7 @@ func EditUser(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"stauts":  code,
+		"status":  code,
 		"message": errmsg.GetErrMsg(code),
 	})
 }
