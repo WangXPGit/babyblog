@@ -15,30 +15,52 @@
                 <span slot="role" slot-scope="role">{{ role == 1 ? '管理员' : '用户'}}</span>
                 <template slot="action" slot-scope="data">
                     <div class="actionSlot">
-                        <a-button type="primary" style="margin-right:15px" @click="editUser(data.ID)">编辑</a-button>
-                        <a-button type="danger" @click="deleteUser(data.ID)">删除</a-button>
+                        <a-button type="primary" icon="edit" style="margin-right:15px" @click="editUser(data.ID)">编辑</a-button>
+                        <a-button type="danger" icon="delete" @click="deleteUser(data.ID)">删除</a-button>
+                        <a-button type="info" icon="info" @click="resetPassword(data.ID)">重置密码</a-button>
                     </div>
                 </template>
             </a-table>
         </a-card>
 
+        <!-- 重置用户密码 -->
+        <a-modal title="重置用户密码"
+                :visible="resetPasswordVisible"
+                @ok="resetPasswordOk"
+                @cancel="resetPasswordCancel"
+                :destroyOnClose="true">
+            <a-form-model :model="resetPasswordUserInfo" :rules="resetPasswordRules" ref="addUserRef">
+                <a-form-model-item label="用户名" prop="username">
+                    <a-input disabled v-model="resetPasswordUserInfo.username"></a-input>
+                </a-form-model-item>
+
+                <a-form-model-item has-feedback label="新密码" prop="newpassword">
+                    <a-input-password v-model="resetPasswordUserInfo.newpassword"></a-input-password>
+                </a-form-model-item>
+
+                <a-form-model-item has-feedback label="确认密码" prop="newcheckpass">
+                    <a-input-password v-model="resetPasswordUserInfo.newcheckpass"></a-input-password>
+                </a-form-model-item>
+            </a-form-model>
+        </a-modal>
+       
         <!-- 新增用户区域 -->
         <a-modal title="新增用户"
                 :visible="addUserVisible"
                 @ok="addUserOk"
                 @cancel="addUserCancel"
                 :destroyOnClose="true">
-            <a-form-model :model="userInfo" :rules="userRules" ref="addUserRef">
+            <a-form-model :model="newUser" :rules="addUserRules" ref="addUserRef">
                 <a-form-model-item label="用户名" prop="username">
-                    <a-input v-model="userInfo.username"></a-input>
+                    <a-input v-model="newUser.username"></a-input>
                 </a-form-model-item>
 
                 <a-form-model-item has-feedback label="密码" prop="password">
-                    <a-input-password v-model="userInfo.password"></a-input-password>
+                    <a-input-password v-model="newUser.password"></a-input-password>
                 </a-form-model-item>
 
                 <a-form-model-item has-feedback label="确认密码" prop="checkpass">
-                    <a-input-password v-model="userInfo.checkpass"></a-input-password>
+                    <a-input-password v-model="newUser.checkpass"></a-input-password>
                 </a-form-model-item>
 
                 <a-form-model-item label="是否为管理员" prop="role">
@@ -60,10 +82,7 @@
                     <a-input v-model="userInfo.username"></a-input>
                 </a-form-model-item>
                 <a-form-model-item label="是否为管理员" prop="role">
-                    <a-select defaultValue="2" style="120px" @change="adminChange">
-                        <a-select-option key="1" value="1">是</a-select-option>
-                        <a-select-option key="2" value="2">否</a-select-option>
-                    </a-select>
+                    <a-switch checked-children="是" un-checked-children="否" @change="adminChange" />
                 </a-form-model-item>
             </a-form-model>
         </a-modal>
@@ -129,6 +148,49 @@ export default {
                 checkpass:'',
                 role: 2,
             },
+            newUser: {
+                id:0,
+                username:'',
+                password:'',
+                checkpass:'',
+                role: 2,
+            },
+            resetPasswordUserInfo: {
+                id:0,
+                username:'',
+                newpassword:'',
+                newcheckpass:'',
+                role: 2,
+            },
+            resetPasswordVisible: false,
+            resetPasswordRules:{
+                newcheckpass:[
+                        {
+                            validator: (rule, value, callback) => {
+                                if (this.resetPasswordUserInfo.newcheckpass === '') {
+                                    callback(new Error("请输入密码"))
+                                }
+                                if (this.resetPasswordUserInfo.newpassword !== this.resetPasswordUserInfo.newcheckpass) {
+                                    callback(new Error("密码不一致，请重新输入"))
+                                } else {
+                                    callback()
+                                }
+                            }, trigger: 'blur',
+                        }],
+                newpassword:[
+                        {
+                            validator: (rule, value, callback) => {
+                                if (this.resetPasswordUserInfo.newpassword === '') {
+                                    callback(new Error("请输入密码"))
+                                }
+                                if (this.resetPasswordUserInfo.newpassword.length < 6 || this.resetPasswordUserInfo.newpassword.length > 20) {
+                                    callback(new Error("密码必须为6到20个字符之间"))
+                                } else {
+                                    callback()
+                                }
+                            }, trigger: 'blur',
+                        }], 
+            },
             addUserVisible: false,
             userRules:{
                 username:[
@@ -164,6 +226,47 @@ export default {
                                     callback(new Error("请输入密码"))
                                 }
                                 if (this.userInfo.password.length < 6 || this.userInfo.password.length > 20) {
+                                    callback(new Error("密码必须为6到20个字符之间"))
+                                } else {
+                                    callback()
+                                }
+                            }, trigger: 'blur',
+                        }], 
+            },
+            addUserRules:{
+                username:[
+                        {
+                            validator: (rule, value, callback) => {
+                                if (this.newUser.username == '') {
+                                    callback(new Error("请输入用户名"))
+                                }
+                                if ([... this.newUser.username].length < 4 || [... this.newUser.username].length > 12) {
+                                    callback(new Error("用户名应当在4到12个字符之间"))
+                                } else {
+                                    callback()
+                                }
+                            }, trigger: 'blur',
+                        }],
+                checkpass:[
+                        {
+                            validator: (rule, value, callback) => {
+                                if (this.newUser.checkpass === '') {
+                                    callback(new Error("请输入密码"))
+                                }
+                                if (this.newUser.password !== this.newUser.checkpass) {
+                                    callback(new Error("密码不一致，请重新输入'"))
+                                } else {
+                                    callback()
+                                }
+                            }, trigger: 'blur',
+                        }],
+                password:[
+                        {
+                            validator: (rule, value, callback) => {
+                                if (this.newUser.password === '') {
+                                    callback(new Error("请输入密码"))
+                                }
+                                if (this.newUser.password.length < 6 || this.newUser.password.length > 20) {
                                     callback(new Error("密码必须为6到20个字符之间"))
                                 } else {
                                     callback()
@@ -227,12 +330,11 @@ export default {
         // 新增用户
         async addUserOk() {
             this.$refs.addUserRef.validate(async (valid)=> {
-                console.log("abc")
                 if (!valid) return this.$message.error("参数不符合要求，请重新输入")
                 const { data: res } = await this.$http.post('user/add', {
-                    username: this.userInfo.username,
-                    password: this.userInfo.password,
-                    role: this.userInfo.role,
+                    username: this.newUser.username,
+                    password: this.newUser.password,
+                    role: this.newUser.role,
                 })
                 if (res.status != 200) return this.$message.error(res.message)
                 this.$message.success('添加用户成功')
@@ -248,11 +350,43 @@ export default {
             this.$message.info('添加已取消')
         },
 
-        adminChange(value) {
-            this.userInfo.role = value
+        adminChange(checked) {
+            this.userInfo.role = checked ? 1 : 2
             console.log(this.userInfo.role)
         },
 
+        // 重置密码
+        async resetPassword(id) {
+            // 打开对话框
+            this.resetPasswordVisible = true
+            // 请求数据并绑定
+            const { data: res } = await this.$http.get(`user/${id}`)
+            this.resetPasswordUserInfo = res.data
+            this.resetPasswordUserInfo.id = id
+            console.log(this.resetPasswordUserInfo.role)
+            // 画重置密码对话框
+            // 处理取消重置、确定重置功能、重置后密码校验功能
+        },
+
+        resetPasswordOk() {
+            this.$refs.addUserRef.validate(async (valid) => {
+                if (!valid) return this.$message.error("新密码不符合要求，请重新输入")
+                const { data : res } = await this.$http.put(`user/${this.resetPasswordUserInfo.id}`, {
+                    username: this.resetPasswordUserInfo.username,
+                    password: this.resetPasswordUserInfo.newpassword,
+                    role: this.resetPasswordUserInfo.role,
+                })
+                if (res.status != 200) return this.$message.error(res.message)
+                this.resetPasswordVisible = false
+                this.$message.success('重置密码成功')
+                this.getUserList()
+            })
+        },
+        resetPasswordCancel() {
+            this.$refs.addUserRef.resetFields()
+            this.resetPasswordVisible = false
+            this.$message.info("重置密码已取消")
+        },
         // 编辑用户
         async editUser(id) {
             this.editUserVisible = true

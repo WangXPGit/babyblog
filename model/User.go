@@ -25,6 +25,20 @@ func CheckUser(name string) (code int) {
 	return errmsg.SUCCESS
 }
 
+// 更新查询
+func CheckUpUser(id int, name string) (code int) {
+	var users User
+	db.Select("id, username").Where("username = ?", name).First(&users)
+	if users.ID == uint(id) {
+		return errmsg.SUCCESS
+	}
+
+	if users.ID > 0 {
+		return errmsg.ERROR_USERNAME_USED
+	}
+	return errmsg.SUCCESS
+}
+
 // 新增用户
 func CreateUser(data *User) int {
 	data.Password = ScryptPw(data.Password)
@@ -76,6 +90,7 @@ func EditUser(id int, data *User) int {
 	var maps = make(map[string]interface{})
 	maps["username"] = data.Username
 	maps["role"] = data.Role
+	maps["password"] = ScryptPw(data.Password)
 	err = db.Model(&User{}).Where("id =?", id).Updates(maps).Error
 	if err != nil {
 		return errmsg.ERROR
