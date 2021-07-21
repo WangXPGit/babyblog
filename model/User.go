@@ -50,12 +50,14 @@ func GetUsers(username string, pageSize int, pageNum int) ([]User, int64) {
 	var users []User
 	var total int64
 
-	if username == "" {
-		db.Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&users).Count(&total)
+	if username != "" {
+		db.Select("id, username, role").Where("username LIKE ?", "%"+username+"%").Find(&users).Count(&total).Limit(pageSize).Offset((pageNum - 1) * pageSize)
+		// db.Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&users).Count(&total)
 		return users, total
 	}
-	db.Where("username LIKE ?", "%"+username+"%").Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&users).Count(&total)
-	if err != gorm.ErrRecordNotFound {
+	db.Select("id, username, role").Find(&users).Count(&total).Limit(pageSize).Offset((pageNum - 1) * pageSize)
+	// db.Where("username LIKE ?", "%"+username+"%").Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&users).Count(&total)
+	if err == gorm.ErrRecordNotFound {
 		return nil, 0
 	}
 	return users, total
