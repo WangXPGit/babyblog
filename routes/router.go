@@ -42,8 +42,8 @@ func InitRouter() {
 	{
 		// 用户模块 路由接口
 		r.POST("user/add", v1.AddUser)
-		r.GET("user/list", v1.GetUsers)
-		r.GET("users/:id", v1.GetUserInfo)
+		r.GET("users", v1.GetUsers)
+		r.GET("user/:id", v1.GetUserInfo)
 
 		// 分类模块 路由接口
 		r.GET("category/list", v1.GetCategories)

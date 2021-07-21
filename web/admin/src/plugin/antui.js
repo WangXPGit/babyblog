@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import { Button, FormModel, Input, Icon, 
   message, Layout, Menu, Card, Table, Row, Col, ConfigProvider,
-  Modal
+  Modal, Select
 } from 'ant-design-vue'
 
 message.config({
@@ -25,3 +25,4 @@ Vue.use(Row)
 Vue.use(Col)
 Vue.use(ConfigProvider)
 Vue.use(Modal)
+Vue.use(Select)
