@@ -25,7 +25,7 @@ func Checkcategory(name string) (code int) {
 func GetCategory(pageSize int, pageNum int) ([]Category, int64) {
 	var category []Category
 	var total int64
-	err = db.Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&category).Count(&total).Error
+	err = db.Find(&category).Count(&total).Limit(pageSize).Offset((pageNum - 1) * pageSize).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return nil, 0
 	}
@@ -65,3 +65,8 @@ func DeleteCategory(id int) int {
 }
 
 // 查询指定分类下的文章列表
+func GetCateInfo(id int) (Category, int) {
+	var cate Category
+	db.Where("id = ? ", id).First(&cate)
+	return cate, errmsg.SUCCESS
+}

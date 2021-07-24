@@ -29,6 +29,16 @@ func AddCategory(c *gin.Context) {
 }
 
 // 查询指定分类下的文章
+func GetCateInfo(c *gin.Context) {
+	id, _ := strconv.Atoi(c.Param("id"))
+	data, code := model.GetCateInfo(id)
+	c.JSON(http.StatusOK, gin.H{
+		"status":  code,
+		"data":    data,
+		"message": errmsg.GetErrMsg(code),
+	})
+}
+
 // 查询分类列表
 func GetCategories(c *gin.Context) {
 	pageSize, _ := strconv.Atoi(c.Query("pageSize"))
@@ -63,7 +73,7 @@ func EditCategory(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, gin.H{
-		"stauts":  code,
+		"status":  code,
 		"message": errmsg.GetErrMsg(code),
 	})
 }
