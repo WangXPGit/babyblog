@@ -50,8 +50,8 @@ func InitRouter() {
 		r.GET("category/:id", v1.GetCateInfo)
 
 		// 文章模块 路由接口
-		r.GET("article/list", v1.GetArticles)
-		r.GET("article/info/:id", v1.GetCategory)
+		r.GET("article", v1.GetArticles)
+		r.GET("article/:id", v1.GetCategory)
 		r.GET("categoryarticle/list", v1.GetCategoryArticle)
 		r.POST("login", v1.Login)
 	}

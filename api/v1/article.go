@@ -56,13 +56,14 @@ func GetCategory(c *gin.Context) {
 func GetArticles(c *gin.Context) {
 	pageSize, _ := strconv.Atoi(c.Query("pageSize"))
 	pageNum, _ := strconv.Atoi(c.Query("pageNum"))
+	title := c.Query("title")
 	if pageSize == 0 {
 		pageSize = -1
 	}
 	if pageNum == 0 {
 		pageNum = -1
 	}
-	data, code, total := model.GetArtilcles(pageSize, pageNum)
+	data, code, total := model.GetArtilcles(title, pageSize, pageNum)
 	c.JSON(http.StatusOK, gin.H{
 		"status":  code,
 		"data":    data,
@@ -78,7 +79,7 @@ func EditArticle(c *gin.Context) {
 	c.ShouldBindJSON(&data)
 	code := model.EditArticle(id, &data)
 	c.JSON(http.StatusOK, gin.H{
-		"stauts":  code,
+		"status":  code,
 		"message": errmsg.GetErrMsg(code),
 	})
 }

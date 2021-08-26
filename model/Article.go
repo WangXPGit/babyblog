@@ -26,10 +26,17 @@ func CreateArticle(data *Article) int {
 }
 
 // 查询文章列表
-func GetArtilcles(pageSize int, pageNum int) ([]Article, int, int64) {
+func GetArtilcles(title string, pageSize int, pageNum int) ([]Article, int, int64) {
 	var article []Article
 	var total int64
-	err = db.Preload("Category").Limit(pageSize).Offset((pageNum - 1) * pageSize).Find(&article).Count(&total).Error
+	if title == "" {
+		err = db.Preload("Category").Find(&article).Count(&total).Limit(pageSize).Offset((pageNum - 1) * pageSize).Error
+		if err != nil && err != gorm.ErrRecordNotFound {
+			return nil, errmsg.ERROR, 0
+		}
+		return article, errmsg.SUCCESS, total
+	}
+	err = db.Preload("Category").Where("title LIKE ?", "%"+title+"%").Find(&article).Count(&total).Limit(pageSize).Offset((pageNum - 1) * pageSize).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return nil, errmsg.ERROR, 0
 	}
