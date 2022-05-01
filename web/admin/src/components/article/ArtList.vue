@@ -9,10 +9,11 @@
                 <a-col :span="4">
                     <a-button type="primary" @click="addArtVisible = true">新增</a-button>
                 </a-col>
+                
             </a-row>
 
             <a-table closable destroyOnClose rowKey="ID" :columns="columns" :pagination='pagination' :dataSource="Artlist" bordered @change="handleTableChange">
-                <span slot="img" slot-scope="img">
+                <span class="ArtImg" slot="img" slot-scope="img">
                     <img :src="img" />
                 </span>
                 <template slot="action" slot-scope="data">
@@ -61,6 +62,7 @@ const columns = [
         dataIndex: 'img',
         key:'img',
         width: '10%',
+        scopedSlots: {customRender:'img'},
         align: 'center'
     },   
     {
@@ -149,5 +151,15 @@ export default {
 .actionSlot {
     display: flex;
     justify-content: center;
+}
+
+.ArtImg{
+    height: 100%;
+    width: 100%;
+}
+
+.ArtImg img {
+    width: 100px;
+    height: 80px;
 }
 </style>
