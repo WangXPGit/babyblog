@@ -52,7 +52,7 @@ func InitRouter() {
 		// 文章模块 路由接口
 		r.GET("article", v1.GetArticles)
 		r.GET("article/:id", v1.GetCategory)
-		r.GET("categoryarticle/list", v1.GetCategoryArticle)
+		r.GET("categoryarticle/list/:id", v1.GetCategoryArticle)
 		r.POST("login", v1.Login)
 	}
 

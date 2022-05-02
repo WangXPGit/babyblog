@@ -44,14 +44,27 @@ func GetArtilcles(title string, pageSize int, pageNum int) ([]Article, int, int6
 }
 
 // 查询指定分类下的文章列表
-func GetCategoryArtilcle(categoryId int, pageSize int, pageNum int) ([]Article, int, int64) {
-	var categroyArticle []Article
+// func GetCategoryArtilcle(categoryId int, pageSize int, pageNum int) ([]Article, int, int64) {
+// 	var categroyArticle []Article
+// 	var total int64
+// 	err = db.Preload("Category").Limit(pageSize).Offset((pageNum-1)*pageSize).Where("cid = ?", categoryId).Find(&categroyArticle).Error
+// 	db.Model(&categroyArticle).Where("cid =?", categoryId).Count(&total)
+// 	if err != nil && err != gorm.ErrRecordNotFound {
+// 		return nil, errmsg.ERROR_CATEGORY_NOT_EXIST, 0
+// 	}
+// 	return categroyArticle, errmsg.SUCCESS, total
+// }
+func GetCategoryArtilcle(id int, pageSize int, pageNum int) ([]Article, int, int64) {
+	var cateArtList []Article
 	var total int64
-	err = db.Preload("Category").Limit(pageSize).Offset((pageNum-1)*pageSize).Where("cid = ?", categoryId).Find(&categroyArticle).Count(&total).Error
-	if err != nil && err != gorm.ErrRecordNotFound {
+
+	err = db.Preload("Category").Limit(pageSize).Offset((pageNum-1)*pageSize).Where(
+		"cid =?", id).Find(&cateArtList).Error
+	db.Model(&cateArtList).Where("cid =?", id).Count(&total)
+	if err != nil {
 		return nil, errmsg.ERROR_CATEGORY_NOT_EXIST, 0
 	}
-	return categroyArticle, errmsg.SUCCESS, total
+	return cateArtList, errmsg.SUCCESS, total
 }
 
 // 查询单个文章

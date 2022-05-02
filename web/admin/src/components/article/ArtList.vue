@@ -10,6 +10,13 @@
                     <a-button type="primary" @click="addArtVisible = true">新增</a-button>
                 </a-col>
                 
+                <a-col :span="3">
+                    <a-select placeholder="请选择分类" style="width:200px" @change="CateChange">
+                        <a-select-option v-for="item in Catelist" :key="item.ID" :value="item.ID">
+                            {{item.name}}
+                        </a-select-option>
+                    </a-select>
+                </a-col>
             </a-row>
 
             <a-table closable destroyOnClose rowKey="ID" :columns="columns" :pagination='pagination' :dataSource="Artlist" bordered @change="handleTableChange">
@@ -85,6 +92,7 @@ export default {
                 showTotal: (total) => `共${total}条`,
             },
             Artlist: [],
+            Catelist: [],
             columns,
             queryParam: {
                 title: '',
@@ -95,6 +103,9 @@ export default {
     },
     created(){
         this.getArtList()
+
+        // 进入页面之前把分类列表中的内容渲染出来
+        this.getCateList()
     },
     methods: {
         // 获取文章列表
@@ -112,6 +123,15 @@ export default {
             this.pagination.total = res.total
         },
     
+        // 获取文章分类列表
+        async getCateList() {
+            const { data: res } = await this.$http.get('category')
+            if (res.status != 200) return this.$message.error(res.message)
+            console.log(res.data)
+            this.Catelist = res.data
+            this.pagination.total = res.total
+        },
+
         handleTableChange(pagination, filters, sorter) {
             var pager = { ...this.pagination }
             pager.current = pagination.current
@@ -143,6 +163,19 @@ export default {
                 },
             });
         },
+
+        // 查询分类下的文章
+        CateChange(value) {
+            this.getCateAet(value)
+        },
+
+        async getCateAet(id) {
+            const { data : res} = await this.$http.get(`categoryarticle/list/${id}`)
+            if (res.status != 200) return this.$message.error(res.message)
+            console.log(res.data)
+            this.Artlist = res.data
+            this.pagination.total = res.total
+        }
     },
 }
 </script>

@@ -43,12 +43,18 @@ func GetCateInfo(c *gin.Context) {
 func GetCategories(c *gin.Context) {
 	pageSize, _ := strconv.Atoi(c.Query("pageSize"))
 	pageNum, _ := strconv.Atoi(c.Query("pageNum"))
-	if pageSize == 0 {
-		pageSize = -1
+
+	switch {
+	case pageSize >= 100:
+		pageSize = 100
+	case pageSize <= 0:
+		pageSize = 10
 	}
+
 	if pageNum == 0 {
-		pageNum = -1
+		pageNum = 1
 	}
+
 	data, total := model.GetCategory(pageSize, pageNum)
 	code := errmsg.SUCCESS
 	c.JSON(http.StatusOK, gin.H{

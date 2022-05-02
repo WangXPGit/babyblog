@@ -25,13 +25,22 @@ func AddArticle(c *gin.Context) {
 func GetCategoryArticle(c *gin.Context) {
 	pageSize, _ := strconv.Atoi(c.Query("pageSize"))
 	pageNum, _ := strconv.Atoi(c.Query("pageNum"))
-	id, _ := strconv.Atoi(c.Query("id"))
-	if pageSize == 0 {
-		pageSize = -1
+	id, _ := strconv.Atoi(c.Param("id"))
+	switch {
+	case pageSize >= 100:
+		pageSize = 100
+	case pageSize <= 0:
+		pageSize = 10
 	}
+
 	if pageNum == 0 {
-		pageNum = -1
+		pageNum = 1
 	}
+
+	if pageSize == 0 {
+		pageSize = 1
+	}
+
 	data, code, total := model.GetCategoryArtilcle(id, pageSize, pageNum)
 	c.JSON(http.StatusOK, gin.H{
 		"status":  code,
@@ -57,11 +66,15 @@ func GetArticles(c *gin.Context) {
 	pageSize, _ := strconv.Atoi(c.Query("pageSize"))
 	pageNum, _ := strconv.Atoi(c.Query("pageNum"))
 	title := c.Query("title")
-	if pageSize == 0 {
-		pageSize = -1
+	switch {
+	case pageSize >= 100:
+		pageSize = 100
+	case pageSize <= 0:
+		pageSize = 10
 	}
+
 	if pageNum == 0 {
-		pageNum = -1
+		pageNum = 1
 	}
 	data, code, total := model.GetArtilcles(title, pageSize, pageNum)
 	c.JSON(http.StatusOK, gin.H{
